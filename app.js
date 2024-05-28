@@ -23,10 +23,23 @@ const sessions = {
 			httpOnly: true,
 			maxAge: 60 * 1000
 		}
-	})
+	}),
+	session3: session({
+		secret: "bfuyvrc4ghewf",
+		resave: false,
+		saveUninitialized: true,
+		cookie: {
+			secure: false,
+			httpOnly: true,
+			maxAge: 60 * 1000
+	}})
 };
 
-
+app.use("/", sessions["session3"]);
+app.get("/", (req, res) => {
+	req.session.main = "serverUp";
+	res.send().status(200);
+});
 app.use("/s1Create", sessions["session1"]);
 app.get("/s1Create", (req, res) => {
 	req.session.xData = "3.14";
@@ -47,6 +60,10 @@ app.get("/s2Create/:px", (req, res) => {
 	if (req.params.px === "display") {
 		res.send(req.session.yData).status(200);
 	}
+});
+
+app.get("/sessions", (req, res) => {
+	res.send(`${req.session.xData} ${req.session.yData} ${req.session.main}`);
 });
 
 app.listen(3000);
