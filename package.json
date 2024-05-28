@@ -22,6 +22,7 @@
   "homepage": "https://github.com/programmer-666/expressStuff#readme",
   "dependencies": {
     "express": "^4.19.2",
-    "express-session": "^1.18.0"
+    "express-session": "^1.18.0",
+    "morgan": "^1.10.0"
   }
 }

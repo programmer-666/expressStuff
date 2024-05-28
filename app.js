@@ -1,22 +1,52 @@
 import express from "express";
 import session from "express-session";
+import morgan from "morgan";
+import os from "node:os";
+
 
 const app = express();
+app.use(morgan("dev"));
 
-const session1 = session({
-	secret: "a123x",
-	resave: false,
-	saveUninitialized: true,
-	cookie: {secure: false, maxAge: 60000}
-});
+const sessions = {
+	session1: session({
+		secret: "V5ALphnKHsJyJgxIsxtvzeNIjI09w97O",
+		resave: false,
+		saveUninitialized: true,
+		cookie: {secure: false, maxAge: 60000}
+	}),
+	session2: session({
+		secret: "MzlzGIHOq3OgEmmP9geqZrEd1l75z42T",
+		resave: false,
+		saveUninitialized: true,
+		cookie: {
+			secure: false,
+			httpOnly: true,
+			maxAge: 60 * 1000
+		}
+	})
+};
 
-app.use(session1);
-app.get("/", (req, res) => {
+
+app.use("/s1Create", sessions["session1"]);
+app.get("/s1Create", (req, res) => {
 	req.session.xData = "3.14";
 	res.send("welcome").status(200);
 });
-app.get("/session", (req, res) => {
-	res.send(req.session.xData).status(200);
+app.get("/s1Create/:px", (req, res) => {
+	if (req.params.px === "display") {
+		res.send(req.session.xData).status(200);
+	}
+});
+
+app.use("/s2Create", sessions["session2"]);
+app.get("/s2Create", (req, res) => {
+	req.session.yData = os.hostname();
+	res.send("session value defined").status(200);
+});
+app.get("/s2Create/:px", (req, res) => {
+	if (req.params.px === "display") {
+		res.send(req.session.yData).status(200);
+	}
 });
 
 app.listen(3000);
