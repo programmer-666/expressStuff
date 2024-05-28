@@ -1,0 +1,27 @@
+{
+  "name": "expressstuff",
+  "version": "0.0.1",
+  "description": "express code tests",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/programmer-666/expressStuff.git"
+  },
+  "keywords": [
+    "express"
+  ],
+  "author": "programmer-666",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/programmer-666/expressStuff/issues"
+  },
+  "homepage": "https://github.com/programmer-666/expressStuff#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "express-session": "^1.18.0"
+  }
+}
