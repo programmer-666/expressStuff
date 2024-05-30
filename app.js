@@ -38,11 +38,7 @@ const sessions = {
 app.use("/", sessions["session3"]);
 app.get("/", (req, res) => {
   req.session.main = "serverUp";
-  res
-    .send(
-      "https://github.com/users/hwestx/emails/326287629/confirm_verification/2f7489fc7ac9df8a6680e821b9c5b7dccb2e4f49",
-    )
-    .status(200);
+  res.send("xOKx").status(200);
 });
 app.use("/s1Create", sessions["session1"]);
 app.get("/s1Create", (req, res) => {
